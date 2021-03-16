@@ -33,8 +33,8 @@ public class SchedulerConfig {
         properties.putAll(quartzProperties.getProperties());
 
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
-        factory.setOverwriteExistingJobs(true);
-        factory.setAutoStartup(true);
+//        factory.setOverwriteExistingJobs(true);
+//        factory.setAutoStartup(true);
         factory.setDataSource(dataSource);
         factory.setQuartzProperties(properties);
 
