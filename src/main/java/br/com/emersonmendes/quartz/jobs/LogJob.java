@@ -2,7 +2,6 @@ package br.com.emersonmendes.quartz.jobs;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.PersistJobDataAfterExecution;
-import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 
@@ -23,7 +22,6 @@ public class LogJob extends QuartzJobBean {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 

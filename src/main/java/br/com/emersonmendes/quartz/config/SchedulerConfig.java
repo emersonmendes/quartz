@@ -1,10 +1,7 @@
 package br.com.emersonmendes.quartz.config;
 
 import br.com.emersonmendes.quartz.jobs.SchedulerJobFactory;
-import org.quartz.SchedulerFactory;
-import org.quartz.simpl.SimpleJobFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -35,11 +32,12 @@ public class SchedulerConfig {
         Properties properties = new Properties();
         properties.putAll(quartzProperties.getProperties());
 
-
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         factory.setOverwriteExistingJobs(true);
+        factory.setAutoStartup(true);
         factory.setDataSource(dataSource);
         factory.setQuartzProperties(properties);
+
         factory.setJobFactory(jobFactory);
 
         return factory;
