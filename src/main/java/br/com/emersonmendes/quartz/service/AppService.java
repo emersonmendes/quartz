@@ -31,12 +31,11 @@ public class AppService {
                 .withIdentity(jobIdentity)
                 .withDescription("description " + jobIdentity)
                 .setJobData(jobDataMap)
-                .storeDurably(true)
-                .requestRecovery(true)
+                .storeDurably()
+                .requestRecovery()
                 .build();
 
             CronTrigger trigger = TriggerBuilder.newTrigger()
-//                .forJob(job)
                 .withSchedule(CronScheduleBuilder.cronSchedule("0/2 * * * * ?"))
                 .withIdentity(triggerIdentity)
                 .withDescription("description " + triggerIdentity)

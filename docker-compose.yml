@@ -15,16 +15,16 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - ./scripts/create-db.sh:/docker-entrypoint-initdb.d/create-db.sh
 
-    quartz_app:
-        image: openjdk:11-jdk
-        restart: unless-stopped
-        environment:
-            - TZ=GMT-3
-        ports:
-            - "8080:8080"
-        depends_on:
-            - quartz_db
-        volumes:
-            - /etc/localtime:/etc/localtime:ro
-            - ./target/quartz.jar:/app/quartz.jar
-        command: [ "java", "-jar", "/app/quartz.jar", "--server.port=8080" ]
+#    quartz_app:
+#        image: openjdk:11-jdk
+#        restart: unless-stopped
+#        environment:
+#            - TZ=GMT-3
+#        ports:
+#            - "8080:8080"
+#        depends_on:
+#            - quartz_db
+#        volumes:
+#            - /etc/localtime:/etc/localtime:ro
+#            - ./target/quartz.jar:/app/quartz.jar
+#        command: [ "java", "-jar", "/app/quartz.jar", "--server.port=8080" ]
