@@ -26,16 +26,16 @@ public class SchedulerConfig {
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean() {
 
-        final SchedulerJobFactory jobFactory = new SchedulerJobFactory();
-        jobFactory.setApplicationContext(applicationContext);
-
-        final Properties properties = new Properties();
-        properties.putAll(quartzProperties.getProperties());
-
         SchedulerFactoryBean factoryBean = new SchedulerFactoryBean();
         factoryBean.setOverwriteExistingJobs(true);
         factoryBean.setDataSource(dataSource);
+
+        final Properties properties = new Properties();
+        properties.putAll(quartzProperties.getProperties());
         factoryBean.setQuartzProperties(properties);
+
+        final SchedulerJobFactory jobFactory = new SchedulerJobFactory();
+        jobFactory.setApplicationContext(applicationContext);
         factoryBean.setJobFactory(jobFactory);
 
         return factoryBean;

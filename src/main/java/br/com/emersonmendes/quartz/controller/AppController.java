@@ -2,7 +2,6 @@ package br.com.emersonmendes.quartz.controller;
 
 import br.com.emersonmendes.quartz.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
