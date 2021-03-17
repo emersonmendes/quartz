@@ -4,6 +4,9 @@ import br.com.emersonmendes.quartz.jobs.LogJob;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.matchers.GroupMatcher;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,35 +17,36 @@ import java.util.UUID;
 @Service
 public class AppService {
 
+    @Autowired
+    private SchedulerFactoryBean schedulerFactoryBean;
+
     public void schedule(String name) {
 
-        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+        name = name + UUID.randomUUID().toString();
+
+        final String jobIdentity = "job-" + name;
+        final String triggerIdentity = "trigger-" + name;
+
+        final JobDataMap jobDataMap = new JobDataMap();
+        jobDataMap.putAsString("something", 23);
+
+        JobDetail job = JobBuilder.newJob(LogJob.class)
+            .withIdentity(jobIdentity)
+            .withDescription("description " + jobIdentity)
+            .setJobData(jobDataMap)
+            .storeDurably()
+            .requestRecovery()
+            .build();
+
+        CronTrigger trigger = TriggerBuilder.newTrigger()
+            .withSchedule(CronScheduleBuilder.cronSchedule("0/2 * * * * ?"))
+            .withIdentity(triggerIdentity)
+            .withDescription("description " + triggerIdentity)
+            .build();
 
         try {
 
-            Scheduler scheduler = schedulerFactory.getScheduler();
-
-            final JobDataMap jobDataMap = new JobDataMap();
-            jobDataMap.putAsString("something", 23);
-
-            name = name + UUID.randomUUID().toString();
-
-            final String jobIdentity = "job-" + name;
-            final String triggerIdentity = "trigger-" + name;
-
-            JobDetail job = JobBuilder.newJob(LogJob.class)
-                .withIdentity(jobIdentity)
-                .withDescription("description " + jobIdentity)
-                .setJobData(jobDataMap)
-                .storeDurably()
-                .requestRecovery()
-                .build();
-
-            CronTrigger trigger = TriggerBuilder.newTrigger()
-                .withSchedule(CronScheduleBuilder.cronSchedule("0/2 * * * * ?"))
-                .withIdentity(triggerIdentity)
-                .withDescription("description " + triggerIdentity)
-                .build();
+            Scheduler scheduler = schedulerFactoryBean.getScheduler();
 
             scheduler.scheduleJob(job, trigger);
             scheduler.start();
