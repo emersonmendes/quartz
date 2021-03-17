@@ -28,6 +28,7 @@ public class SchedulerConfig {
 
         SchedulerFactoryBean factoryBean = new SchedulerFactoryBean();
         factoryBean.setOverwriteExistingJobs(true);
+        factoryBean.setAutoStartup(true);
         factoryBean.setDataSource(dataSource);
 
         final Properties properties = new Properties();
