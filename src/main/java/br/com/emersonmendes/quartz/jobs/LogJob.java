@@ -1,12 +1,13 @@
 package br.com.emersonmendes.quartz.jobs;
 
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 import org.quartz.PersistJobDataAfterExecution;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 
 @PersistJobDataAfterExecution
-//@DisallowConcurrentExecution
+@DisallowConcurrentExecution
 public class LogJob extends QuartzJobBean {
 
     @Override

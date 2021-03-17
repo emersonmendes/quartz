@@ -45,7 +45,6 @@ public class AppService {
                 .build();
 
             scheduler.scheduleJob(job, trigger);
-
             scheduler.start();
 
         } catch (SchedulerException e) {
