@@ -63,7 +63,7 @@ public class AppService {
 
         try {
 
-            Scheduler scheduler = new StdSchedulerFactory().getScheduler();
+            Scheduler scheduler = schedulerFactoryBean.getScheduler();
 
             for (String groupName : scheduler.getJobGroupNames()) {
 
