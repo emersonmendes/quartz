@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AppService {
@@ -23,6 +24,8 @@ public class AppService {
 
             final JobDataMap jobDataMap = new JobDataMap();
             jobDataMap.putAsString("something", 23);
+
+            name = name + UUID.randomUUID().toString();
 
             final String jobIdentity = "job-" + name;
             final String triggerIdentity = "trigger-" + name;
