@@ -2,10 +2,8 @@ package br.com.emersonmendes.quartz.service;
 
 import br.com.emersonmendes.quartz.jobs.LogJob;
 import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 
