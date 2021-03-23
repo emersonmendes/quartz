@@ -9,8 +9,8 @@
 - Docker compose
 - Maven
 
-### Running 
+### Running docker
 
 ```bash
-docker-compose up
+mvn clean install -DskipTests && docker-compose up
 ```
